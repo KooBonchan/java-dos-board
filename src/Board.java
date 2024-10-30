@@ -8,16 +8,17 @@ import java.util.Date;
 public class Board {
   private int no;
   private String title;
-  private String content;
-  private String writerID;
+  private String writer;
   private Date date;
 
+  @Setter
+  private String content;
+
   @Builder
-  public Board(int no, String title, String content, String writerID, Date date) {
+  public Board(int no, String title, String writer, Date date) {
     this.no = no;
     this.title = title;
-    this.content = content;
-    this.writerID = writerID;
+    this.writer = writer;
     this.date = date;
   }
 
@@ -40,13 +41,12 @@ public class Board {
 
   public static String listFormat(){
     return
-      new StringBuilder()
-        .append("[Posts]\n")
-        .append("-".repeat(75))
-        .append(String.format("\n%-4s | %-12s | %-10s | %-40s\n",
-          "No.", "Writer", "Date", "Title"))
-        .append("-".repeat(75))
-        .toString();
+      "[Posts]\n" +
+      "-".repeat(75) +
+      String.format("\n%-4s | %-12s | %-10s | %-40s\n",
+        "No.", "Writer", "Date", "Title") +
+      "-".repeat(75) // no newline at the end
+      ;
   }
 
   public String toListEntity(){
@@ -54,7 +54,7 @@ public class Board {
       "%04d | %-12s | %-10s | %-40s\n",
       //total length = 75
       no%10000,
-      abbreviation(writerID,12),
+      abbreviation(writer,12),
       new SimpleDateFormat("yyyy-MM-dd").format(date),
       abbreviation(title,40)
     );

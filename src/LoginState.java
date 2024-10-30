@@ -2,15 +2,15 @@ public class LoginState implements State{
   private String id = null;
 
   LoginState(){
-    showDefault();
+    getIDInput();
   }
 
-  void showDefault(){
+  void getIDInput(){
     System.out.print("ID: ");
   }
 
   @Override
-  public void execute(String commandLine) {
+  public void execute() {
 
   }
 }

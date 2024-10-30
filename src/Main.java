@@ -1,7 +1,3 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.sql.DriverManager;
-import java.sql.SQLException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,15 +15,14 @@ public class Main {
      * DISCONNECT DB - ConnectionManager
      */
 
-    Context.setState(new LoginState());
-    Scanner scanner = new Scanner(System.in);
-    String line = null;
+    Context.setState(new HomeState());
+
     while(true){
-      Context.executeState(line);
+      Context.executeState();
+      // if need to exit program, each state may set program end state.
       if(Context.programEndFlag()){
         break;
       }
-      scanner.nextLine();
     }
     ConnectionManager.getInstance().closeConnection();
   }
