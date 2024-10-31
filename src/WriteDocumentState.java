@@ -4,6 +4,7 @@ import java.sql.SQLException;
 
 public class WriteDocumentState implements State{
   public WriteDocumentState () {
+    for(int i = 0; i < 50; i++) System.out.println();
     System.out.flush();
     System.out.println("Write Document");
     System.out.print("title: ");
@@ -22,7 +23,6 @@ public class WriteDocumentState implements State{
       return;
     }
     if(contentBuilder == null) contentBuilder = new StringBuilder();
-    contentBuilder.append(commandLine).append('\n');
     if(commandLine.isEmpty() && !contentBuilder.isEmpty()){
       System.out.println("Uploading content...");
       String query =
@@ -44,6 +44,10 @@ public class WriteDocumentState implements State{
       }finally{
         Context.setState(new HomeState());
       }
+    }
+    else{
+      contentBuilder.append(commandLine).append('\n');
+
     }
   }
 }

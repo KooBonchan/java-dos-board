@@ -15,11 +15,11 @@ public class Main {
      * DISCONNECT DB - ConnectionManager
      */
 
-    Context.setState(new HomeState());
+    Context.setState(new LoginState());
 
     while(true){
       Context.executeState();
-      // if need to exit program, each state may set program end state.
+      // if it needs to exit program, each state may set program end state.
       if(Context.programEndFlag()){
         break;
       }

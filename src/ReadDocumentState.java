@@ -6,6 +6,7 @@ import java.sql.SQLException;
 public class ReadDocumentState implements State{
   private Board board;
   public ReadDocumentState(Board board) {
+    for(int i = 0; i < 50; i++) System.out.println();
     System.out.flush();
     this.board = board;
   }
@@ -27,19 +28,19 @@ public class ReadDocumentState implements State{
           System.out.println("Enter anything to proceed.");
           String additionalInput = Context.getNextLine();
           if(additionalInput.equalsIgnoreCase("c")){ return;}
-          if(additionalInput.equals("1")){
-            String query = "delete from boards where bno=?";
-            java.sql.Connection connection = ConnectionManager.getInstance().getConnection();
-            try(
-                PreparedStatement preparedStatement = connection.prepareStatement(query)){
-              preparedStatement.setInt(1, board.getNo());
-              preparedStatement.executeUpdate();
-              System.out.flush();
-              System.out.println("Succeeded deletion");
-              Context.setState(new HomeState());
-            } catch(SQLException ignored){
-              System.out.println("Failed to delete your document. Retry.");
-            }
+          String query = "delete from boards where bno=?";
+          java.sql.Connection connection = ConnectionManager.getInstance().getConnection();
+          try(
+            PreparedStatement preparedStatement = connection.prepareStatement(query)
+          ){
+            preparedStatement.setInt(1, board.getNo());
+            preparedStatement.executeUpdate();
+            for(int i = 0; i < 50; i++) System.out.println();
+            System.out.flush();
+            System.out.println("Succeeded deletion");
+            Context.setState(new HomeState());
+          } catch(SQLException ignored){
+            System.out.println("Failed to delete your document. Retry.");
           }
           break;
         case 4:
