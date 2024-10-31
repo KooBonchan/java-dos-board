@@ -15,7 +15,8 @@ public class HomeState implements State{
   private void getBoard(){
     String selectBoard = "" +
       "SELECT bno, btitle, bwriter, bdate " +
-      "FROM boards";
+      "FROM boards " +
+      "ORDER BY bno DESC";
     java.sql.Connection connection = ConnectionManager.getInstance().getConnection();
     try(PreparedStatement preparedStatement = connection.prepareStatement(selectBoard);
         ResultSet resultSet = preparedStatement.executeQuery()){
@@ -52,7 +53,7 @@ public class HomeState implements State{
 
   @Override
   public void execute() {
-    String commandLine = Context.getScanner().nextLine();
+    String commandLine = Context.getNextLine();
     String additionalInput;
 
     try{
@@ -60,33 +61,29 @@ public class HomeState implements State{
       switch(command){
         case 1:
           Context.setState(new WriteDocumentState());
-          break;
+          return;
+
         case 2:
-          //TODO
           System.out.println("Read a Document(Enter C to cancel)");
           System.out.print("Document id: ");
-          additionalInput = Context.getScanner().nextLine();
+          additionalInput = Context.getNextLine();
           if(additionalInput.equalsIgnoreCase("c")){ return;}
-          try{
-            int id = Integer.parseInt(additionalInput);
-            for(Board board : boards){
-              if(board.getNo() == id){
-                Context.setState(new ReadDocumentState(board));
-                return;
-              }
+          int id = Integer.parseInt(additionalInput);
+          for(Board board : boards){
+            if(board.getNo() == id){
+              Context.setState(new ReadDocumentState(board));
+              return;
             }
-            System.out.println("No such board with given document Id.");
-          } catch (NumberFormatException e) {
-            System.out.println("Operation canceled - Wrong input");
           }
-          printBoard();
+          // no such article.
+          System.out.println("No such article.");
           printMenu();
           break;
+
         case 3:
           System.out.println("Warning: Deleting all data, Unrecoverable");
-          System.out.println("Enter 1 to Delete all board (Enter C to cancel)");
-          additionalInput = Context.getScanner().nextLine();
-          if(additionalInput.equalsIgnoreCase("c")){ return;}
+          System.out.println("Enter 1 to Delete all board (Else, total delete is canceled)");
+          additionalInput = Context.getNextLine();
           if(additionalInput.equals("1")){
             String query = "delete from boards";
             java.sql.Connection connection = ConnectionManager.getInstance().getConnection();
@@ -96,7 +93,9 @@ public class HomeState implements State{
             } catch(SQLException ignored){}
             Context.setState(new HomeState());
           }
+          printMenu();
           break;
+
         case 4:
           Context.setProgramEnd();
           break;
@@ -105,6 +104,7 @@ public class HomeState implements State{
       }
     } catch (NumberFormatException e) {
       System.out.println("Not allowed Command");
+      printMenu();
     }
   }
 }

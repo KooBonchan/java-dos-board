@@ -51,7 +51,7 @@ public class Board {
 
   public String toListEntity(){
     return String.format(
-      "%04d | %-12s | %-10s | %-40s\n",
+      "%04d | %-12s | %-10s | %-40s",
       //total length = 75
       no%10000,
       abbreviation(writer,12),

@@ -1,3 +1,4 @@
+import java.sql.Clob;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
@@ -5,23 +6,23 @@ public class WriteDocumentState implements State{
   public WriteDocumentState () {
     System.out.flush();
     System.out.println("Write Document");
-    System.out.println("title: ");
+    System.out.print("title: ");
   }
   private String title;
   private StringBuilder contentBuilder;
 
   @Override
   public void execute() {
-    String commandLine = Context.getScanner().nextLine();
+    String commandLine = Context.getNextLine();
     commandLine = commandLine.strip();
     if(title == null){
       title = commandLine;
-      System.out.println("Type empty line to end typing contents");
+      System.out.println("(Type empty line to end typing contents)");
       System.out.print("content: ");
       return;
     }
     if(contentBuilder == null) contentBuilder = new StringBuilder();
-    contentBuilder.append(commandLine);
+    contentBuilder.append(commandLine).append('\n');
     if(commandLine.isEmpty() && !contentBuilder.isEmpty()){
       System.out.println("Uploading content...");
       String query =
@@ -32,7 +33,9 @@ public class WriteDocumentState implements State{
         PreparedStatement preparedStatement = connection.prepareStatement(query)
         ){
         preparedStatement.setString(1, title);
-        preparedStatement.setString(2, contentBuilder.toString());
+        Clob clob = connection.createClob();
+        clob.setString(1, contentBuilder.toString());
+        preparedStatement.setClob(2, clob);
         preparedStatement.setString(3, Context.getUserId());
         preparedStatement.executeUpdate();
 

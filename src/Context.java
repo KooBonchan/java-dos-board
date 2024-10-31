@@ -15,8 +15,10 @@ public class Context {
   // remove default user id after login / signup.
 
 
-  @Getter
   private final static Scanner scanner = new Scanner(System.in);
+  public static String getNextLine(){
+    return scanner.nextLine();
+  }
 
   public static boolean programEndFlag(){
     return currentState == null;

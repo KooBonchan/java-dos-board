@@ -18,7 +18,8 @@ public class ConnectionManager {
     try{
       instance.connection = DriverManager.getConnection(URL, USER, PW);
     } catch (SQLException e) {
-      throw new RuntimeException("Failed to create a database connection",e);
+      System.out.println("Failed to create a database connection: "+e.getMessage());
+      System.exit(1);
     }
 
     Runtime.getRuntime().addShutdownHook(

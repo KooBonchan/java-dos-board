@@ -5,14 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fb394228-45be-4869-9cbf-8f7366c91809" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/src/ReadDocumentState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ConnectionManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Context.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Context.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/HomeState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/HomeState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/LoginState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/LoginState.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/State.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ReadDocumentState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ReadDocumentState.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/WriteDocumentState.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/WriteDocumentState.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -69,7 +68,7 @@
     "settings.editor.selected.configurable": "preferences.pluginManager",
     "애플리케이션.Connection.executor": "Run",
     "애플리케이션.ConnectionQuery.executor": "Run",
-    "애플리케이션.Main.executor": "Debug",
+    "애플리케이션.Main.executor": "Run",
     "애플리케이션.Transaction.executor": "Run"
   },
   "keyToStringList": {
